@@ -1,5 +1,6 @@
 module.exports = {
 	reactStrictMode: true,
+	images: { domains: ['images.unsplash.com', 'tailwindui.com'] },
 	env: {
 		MONGO_URI:
 			'mongodb+srv://jhere123:jhere123@maindb.bmstb.mongodb.net/mainDatabase?retryWrites=true&w=majority',

@@ -5,7 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 export default function Default({ children, title = 'Dubupod App' }) {
 	return (
-		<div className="bg-[#25294A] h-screen">
+		<div className="bg-[#25294A] h-screen w-screen">
 			<Head>
 				<title>{title}</title>
 				<meta charSet="utf-8" />
