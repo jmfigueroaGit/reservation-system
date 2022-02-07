@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {  
+            "@/components/*": ["components/*"],
+            "@/config/*": ["config/*"],
+            "@/controllers/*": ["controllers/*"], 
+            "@/middlewares/*": ["middlewares/*"], 
+            "@/models/*": ["models/*"],
+            "@/actions/*": ["redux/actions/*"],
+            "@/redux/*": ["redux/*"],
+            "@/constants/*": ["redux/constants/*"],
+            "@/reducers/*": ["redux/reducers/*"],
+            "@/utils/*": ["utils/*"],
+        }
+    }
+}
