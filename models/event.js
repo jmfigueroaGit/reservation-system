@@ -6,36 +6,104 @@ const eventSchema = new mongoose.Schema(
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User',
 		},
-		image: {
-			public_id: {
-				type: String,
-			},
-			url: {
-				type: String,
-			},
-		},
-		name: {
+		title: {
 			type: String,
 			required: true,
 		},
-		description: {
+		organization: {
+			type: String,
+		},
+		type: {
+			type: String,
+			required: true,
+		},
+		category: {
 			type: String,
 			required: true,
 		},
 		location: {
-			type: String,
-			required: true,
+			venue: {
+				onSite: { type: Boolean },
+				addLocation: { type: String },
+			},
+			online: { type: Boolean },
+			tba: { type: Boolean },
 		},
-		isPaid: {
+		dateTime: {
+			eventStart: {
+				type: Date,
+				required: true,
+			},
+			eventEnd: {
+				type: Date,
+				required: true,
+			},
+			startTime: {
+				type: String,
+				required: true,
+			},
+			endTime: {
+				type: String,
+				required: true,
+			},
+		},
+		details: {
+			mainEventImage: {
+				public_id: {
+					type: String,
+				},
+				url: {
+					type: String,
+				},
+			},
+			description: {
+				type: String,
+			},
+			additional: [
+				{
+					text: {
+						type: String,
+					},
+					image: {
+						public_id: {
+							type: String,
+						},
+						url: {
+							type: String,
+						},
+					},
+					video: {
+						type: String,
+					},
+				},
+			],
+		},
+		onlineEvent: {
+			link_url: { type: String },
+			image: {
+				public_id: {
+					type: String,
+				},
+				url: {
+					type: String,
+				},
+			},
+			text: {
+				type: String,
+			},
+			video: {
+				link: {
+					type: String,
+				},
+			},
+		},
+		publish: {
 			type: Boolean,
 			default: false,
 		},
-		date: {
-			type: String,
-			required: true,
-		},
-		url: {
-			type: String,
+		public: {
+			type: Boolean,
+			default: false,
 		},
 	},
 	{

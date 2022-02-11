@@ -1,7 +1,7 @@
 import nc from 'next-connect';
 import dbConnect from '@/config/dbConnect';
 
-import { getEvent } from '@/controllers/eventController';
+import { getTicket } from '@/controllers/ticketController';
 import onError from '@/middlewares/errors';
 
 const handler = nc({
@@ -9,5 +9,5 @@ const handler = nc({
 });
 
 dbConnect();
-handler.get(getEvent);
+handler.get(getTicket);
 export default handler;
