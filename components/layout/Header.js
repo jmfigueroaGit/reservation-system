@@ -19,7 +19,7 @@ export default function Header() {
 		return <LoadingScreen />;
 	} else {
 		return (
-			<header className="top-0 flex flex-wrap items-center justify-between px-6 sticky-top bg-[#25294A] ">
+			<header className="top-0 flex flex-wrap items-center justify-between px-6 sticky-top bg-[#25294A] z-50">
 				<div className="flex items-center flex-shrink-0 mr-6 text-white">
 					<Link href="/" passHref>
 						<h1 className="text-2xl font-bold tracking-widest cursor-pointer p-7">

@@ -7,11 +7,12 @@ import Link from 'next/link';
 import ButtonLoader from '../layout/ButtonLoader';
 import {
 	CheckCircleIcon,
+	LinkIcon,
 	PhotographIcon,
-	TrashIcon,
 } from '@heroicons/react/solid';
+import Image from 'next/image';
 
-export default function Details() {
+export default function OnlineEventPage() {
 	const [finish, setFinish] = useState(false);
 	const [image, setImage] = useState('');
 	const [imagePreview, setImagePreview] = useState('');
@@ -56,34 +57,34 @@ export default function Details() {
 								</div>
 							</li>
 						</Link>
-						<li className="flex items-center justify-between w-full mb-6 text-indigo-400 cursor-pointer hover:text-indigo-400">
-							<div className="flex items-center">
-								{!finish ? (
-									<h1 className="px-3 py-1 text-white bg-indigo-400 rounded-full">
-										2
-									</h1>
-								) : (
-									<CheckCircleIcon className="h-9" />
-								)}
-								<span className="ml-2 font-semibold text-md">Details</span>
-							</div>
-						</li>
-						<Link href={'/manage/events/1/online-event'} passHref>
+						<Link href={'/manage/events/1/details'} passHref>
 							<li className="flex items-center justify-between w-full mb-6 text-indigo-200 cursor-pointer hover:text-indigo-400">
 								<div className="flex items-center">
 									{!finish ? (
-										<h1 className="bg-[#25294A] text-white py-1 px-3 rounded-full">
-											3
+										<h1 className="px-3 py-1 text-white  bg-[#25294A] rounded-full">
+											2
 										</h1>
 									) : (
 										<CheckCircleIcon className="h-9" />
 									)}
-									<span className="ml-2 font-semibold text-md">
-										Online Event Page
-									</span>
+									<span className="ml-2 font-semibold text-md">Details</span>
 								</div>
 							</li>
-						</Link>{' '}
+						</Link>
+						<li className="flex items-center justify-between w-full mb-6 text-indigo-400 cursor-pointer hover:text-indigo-400">
+							<div className="flex items-center">
+								{!finish ? (
+									<h1 className="px-3 py-1 text-white bg-indigo-400 rounded-full">
+										3
+									</h1>
+								) : (
+									<CheckCircleIcon className="h-9" />
+								)}
+								<span className="ml-2 font-semibold text-md">
+									Online Event Page
+								</span>
+							</div>
+						</li>
 						<Link href={'/manage/events/1/tickets'} passHref>
 							<li className="flex items-center justify-between w-full mb-6 text-indigo-200 cursor-pointer hover:text-indigo-400">
 								<div className="flex items-center">
@@ -116,74 +117,81 @@ export default function Details() {
 
 			<form className="w-screen " onSubmit={submitHandler}>
 				<div className="container mx-auto w-4/5  bg-[#2C325A] m-10 rounded-lg drop-shadow-md">
-					<div className="flex flex-row p-10 m-5 ">
-						<div className="flex flex-col flex-none w-1/3 text-white">
-							<h1 className="text-3xl font-bold ">Main Event Image</h1>
+					<div className="flex flex-row p-10 m-5 justify-evenly ">
+						<div className="flex flex-col flex-none w-2/4 mt-5 text-white">
+							<h1 className="text-3xl font-bold ">Attendee Event Page</h1>
 							<p className="pt-2 pr-10 font-light text-justify">
-								This is the first image attendees will see at the top of your
-								listing. Use a high quality image: 2160x1080px (2:1 ratio).
+								Attendees will join your online event through your virtual
+								venue.Use this space to embed your Zoom video and share
+								exclusive content. We`ll direct your ticket holders to this page
+								from your event listing and in reminder emails.
 							</p>
 						</div>
-						<div className="w-4/5 rounded-lg shadow-xl bg-[#2F3569] hover:bg-[#25294A]">
-							<div className="m-4 ">
-								<div className="flex items-center justify-center w-full ">
-									{imagePreview && image ? (
-										<>
-											<label className="overflow-hidden h-56 justify-center w-full bg-cover hover:bg-[#25294A]  cursor-pointer ">
-												<img
-													src={imagePreview}
-													className="w-screen h-56 opacity-80 "
-													alt="image"
-												/>
-												<input
-													type="file"
-													className="opacity-0"
-													onChange={handleChange}
-												/>
-											</label>
-										</>
-									) : (
-										<label className="flex flex-col justify-center w-full h-56 cursor-pointer hover:border-gray-300 ">
-											<div className="flex flex-col items-center pt-7">
-												<PhotographIcon className="h-12 text-gray-200" />
-												<h1 className="pt-1 font-semibold tracking-wider text-white text-md ">
-													Select a photo
-												</h1>
-												<p className="pt-1 text-sm font-thin tracking-wider text-gray-300 ">
-													Upload Image(jpg,png,svg,jpeg)
-												</p>
-											</div>
-											<input
-												type="file"
-												className="opacity-0"
-												onChange={handleChange}
-											/>
-										</label>
-									)}
-								</div>
-							</div>
-						</div>
+						<Image
+							src="/images/online-event.png"
+							alt="Picture of the author"
+							width={400}
+							height={300}
+						/>
 					</div>
 				</div>
 				<div className="container mx-auto w-4/5  bg-[#2C325A] m-10 rounded-lg drop-shadow-md">
 					<div className="flex flex-row p-10 m-5 ">
 						<div className="flex flex-col flex-none w-1/3 text-white">
-							<h1 className="text-3xl font-bold ">Description</h1>
+							<h1 className="flex flex-row items-center text-2xl font-bold">
+								<span className="mr-2">
+									<LinkIcon className="h-10 p-2 mx-1 rounded-full bg-[#25294A] " />
+								</span>
+								Add live video or audio
+							</h1>
 							<p className="pt-2 pr-10 font-light text-justify">
-								Add more details to your event like your schedule, sponsors, or
-								featured guests.
+								Connect with Zoom to embed your event within your virtual venue,
+								or link to another video or audio service.
 							</p>
 						</div>
 						<div className="flex flex-col w-2/3 p-5 text-white">
 							<div className="flex flex-col">
-								<h3 className="text-xl font-semibold">
-									Event Title <span className="text-red-500">*</span>
+								<h3 className="mb-5 text-2xl font-semibold">
+									Live Video or Audio
 								</h3>
+								<h3 className="font-semibold text-md">URL</h3>
+								<input
+									className="p-4 m-2 leading-tight text-gray-100 bg-[#2F3569] hover:bg-[#25294A] border-2 rounded-lg  border-transparent focus:border-transparent focus:ring-0 "
+									id="eventTitle"
+									type="text"
+									placeholder="http://www.video-or-audio-provider.com"
+									autoComplete="off"
+								/>
+								<h3 className="font-semibold text-md">Title</h3>
+								<input
+									className="p-4 m-2 leading-tight text-gray-100 bg-[#2F3569] hover:bg-[#25294A] border-2 rounded-lg  border-transparent focus:border-transparent focus:ring-0 "
+									id="eventTitle"
+									type="text"
+									placeholder="Add a title to your live or audio"
+									autoComplete="off"
+								/>{' '}
+								<label className="p-4 m-2  flex flex-col h-56 justify-center   bg-[#2F3569] hover:bg-[#25294A] rounded-lg cursor-pointer ">
+									<div className="flex flex-col items-center pt-7">
+										<PhotographIcon className="h-12 text-gray-200" />
+										<h1 className="pt-1 font-semibold tracking-wider text-white text-md ">
+											Drag & Drop or click to add a video preview (optional).
+										</h1>
+										<p className="pt-1 text-sm font-thin tracking-wider text-gray-300 ">
+											Upload Image(jpg,png,svg,jpeg)
+										</p>
+									</div>
+									<input
+										type="file"
+										className="opacity-0"
+										onChange={handleChange}
+									/>
+								</label>
+								<h3 className="font-semibold text-md">Description</h3>
 								<textarea
-									className="hover:bg-[#25294A] form-control block w-full px-3 py-1.5 text-base font-normal text-gray-100 bg-[#2F3569] bg-clip-padding  rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-[#39407c] focus:border-blue-600 focus:outline-none"
+									className="p-4 m-2 form-control hover:bg-[#25294A] block  px-3 py-1.5 text-base font-normal text-gray-900 bg-[#2F3569] bg-clip-padding  rounded transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
 									id="exampleFormControlTextarea1"
 									rows="4"
-									placeholder="Write a short event summary to get attendees excited."
+									placeholder="Add a description of further instructions here (optional)"
 								></textarea>
 							</div>
 						</div>

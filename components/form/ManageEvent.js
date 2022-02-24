@@ -7,7 +7,7 @@ import ButtonLoader from '../layout/ButtonLoader';
 import { CheckCircleIcon } from '@heroicons/react/solid';
 import Link from 'next/link';
 
-export default function AddEvent() {
+export default function ManageEvent() {
 	const [title, setTitle] = useState('');
 	const [org, setOrg] = useState('');
 	const [type, setType] = useState('');
@@ -100,20 +100,20 @@ export default function AddEvent() {
 			<div className="w-80 absolute sm:relative bg-[#2C325A] shadow flex-col justify-between hidden sm:flex  m-2 rounded-md">
 				<div className="px-8">
 					<ul className="mt-12">
-						<li className="flex w-full justify-between text-indigo-400 hover:text-indigo-400 cursor-pointer items-center mb-6">
+						<li className="flex items-center justify-between w-full mb-6 text-indigo-400 cursor-pointer hover:text-indigo-400">
 							<div className="flex items-center">
 								{!finish ? (
-									<h1 className="bg-indigo-400 text-white py-1 px-3 rounded-full">
+									<h1 className="px-3 py-1 text-white bg-indigo-400 rounded-full">
 										1
 									</h1>
 								) : (
 									<CheckCircleIcon className="h-9" />
 								)}
-								<span className="text-md ml-2 font-semibold">Basic Info</span>
+								<span className="ml-2 font-semibold text-md ">Basic Info</span>
 							</div>
 						</li>{' '}
 						<Link href={'/manage/events/1/details'} passHref>
-							<li className="flex w-full justify-between text-indigo-200 hover:text-indigo-400 cursor-pointer items-center mb-6">
+							<li className="flex items-center justify-between w-full mb-6 text-indigo-200 cursor-pointer hover:text-indigo-400">
 								<div className="flex items-center">
 									{!finish ? (
 										<h1 className="bg-[#25294A] text-white py-1 px-3 rounded-full">
@@ -122,35 +122,41 @@ export default function AddEvent() {
 									) : (
 										<CheckCircleIcon className="h-9" />
 									)}
-									<span className="text-md  ml-2">Details</span>
+									<span className="ml-2 font-semibold text-md">Details</span>
 								</div>
 							</li>
 						</Link>
-						<li className="flex w-full justify-between text-indigo-200 hover:text-indigo-400 cursor-pointer items-center mb-6">
-							<div className="flex items-center">
-								{!finish ? (
-									<h1 className="bg-[#25294A] text-white py-1 px-3 rounded-full">
-										3
-									</h1>
-								) : (
-									<CheckCircleIcon className="h-9" />
-								)}
-								<span className="text-md  ml-2">Online Event Page</span>
-							</div>
-						</li>
-						<li className="flex w-full justify-between text-indigo-200 hover:text-indigo-400 cursor-pointer items-center mb-6">
-							<div className="flex items-center">
-								{!finish ? (
-									<h1 className="bg-[#25294A] text-white py-1 px-3 rounded-full">
-										4
-									</h1>
-								) : (
-									<CheckCircleIcon className="h-9" />
-								)}
-								<span className="text-md  ml-2">Tickets</span>
-							</div>
-						</li>
-						<li className="flex w-full justify-between text-indigo-200 hover:text-indigo-400 cursor-pointer items-center mb-6">
+						<Link href={'/manage/events/1/online-event'} passHref>
+							<li className="flex items-center justify-between w-full mb-6 text-indigo-200 cursor-pointer hover:text-indigo-400">
+								<div className="flex items-center">
+									{!finish ? (
+										<h1 className="bg-[#25294A] text-white py-1 px-3 rounded-full">
+											3
+										</h1>
+									) : (
+										<CheckCircleIcon className="h-9" />
+									)}
+									<span className="ml-2 font-semibold text-md">
+										Online Event Page
+									</span>
+								</div>
+							</li>
+						</Link>
+						<Link href={'/manage/events/1/tickets'} passHref>
+							<li className="flex items-center justify-between w-full mb-6 text-indigo-200 cursor-pointer hover:text-indigo-400">
+								<div className="flex items-center">
+									{!finish ? (
+										<h1 className="bg-[#25294A] text-white py-1 px-3 rounded-full">
+											4
+										</h1>
+									) : (
+										<CheckCircleIcon className="h-9" />
+									)}
+									<span className="ml-2 font-semibold text-md">Tickets</span>
+								</div>
+							</li>
+						</Link>
+						<li className="flex items-center justify-between w-full mb-6 text-indigo-200 cursor-pointer hover:text-indigo-400">
 							<div className="flex items-center">
 								{!finish ? (
 									<h1 className="bg-[#25294A] text-white py-1 px-3 rounded-full">
@@ -159,7 +165,7 @@ export default function AddEvent() {
 								) : (
 									<CheckCircleIcon className="h-9" />
 								)}
-								<span className="text-md  ml-2">Publish</span>
+								<span className="ml-2 font-semibold text-md">Publish</span>
 							</div>
 						</li>
 					</ul>
@@ -181,7 +187,7 @@ export default function AddEvent() {
 								Event Title <span className="text-red-500">*</span>
 							</h3>
 							<input
-								className="p-4 m-2 leading-tight text-gray-100 bg-[#2F3569] border-2 rounded-lg  border-transparent focus:border-transparent focus:ring-0 "
+								className="hover:bg-[#25294A] p-4 m-2 leading-tight text-gray-100 bg-[#2F3569] border-2 rounded-lg  border-transparent focus:border-transparent focus:ring-0 "
 								id="eventTitle"
 								type="text"
 								placeholder="Be clear and descriptive."
@@ -190,7 +196,7 @@ export default function AddEvent() {
 							/>
 							<h3 className="text-xl font-semibold">Organizer</h3>
 							<input
-								className="p-4 m-2 leading-tight text-gray-100 bg-[#2F3569] border-2 rounded-lg  border-transparent focus:border-transparent focus:ring-0 "
+								className="hover:bg-[#25294A] p-4 m-2 leading-tight text-gray-100 bg-[#2F3569] border-2 rounded-lg  border-transparent focus:border-transparent focus:ring-0 "
 								id="organizer"
 								type="text"
 								placeholder="Tell attendees who is organizing this event."
@@ -205,7 +211,7 @@ export default function AddEvent() {
 									<select
 										id="type"
 										name="type"
-										className="p-4 m-2 leading-tight text-xl font-semibold text-gray-400 bg-[#2F3569] border-2 rounded-lg  border-transparent focus:border-transparent focus:ring-0"
+										className="hover:bg-[#25294A] p-4 m-2 leading-tight text-xl font-semibold text-gray-400 bg-[#2F3569] border-2 rounded-lg  border-transparent focus:border-transparent focus:ring-0"
 										value={type}
 										onChange={(e) => setType(e.target.value)}
 									>
@@ -222,7 +228,7 @@ export default function AddEvent() {
 									<select
 										id="category"
 										name="category"
-										className="p-4 m-2 leading-tight text-xl font-semibold text-gray-400 bg-[#2F3569] border-2 rounded-lg  border-transparent focus:border-transparent focus:ring-0"
+										className="hover:bg-[#25294A] p-4 m-2 leading-tight text-xl font-semibold text-gray-400 bg-[#2F3569] border-2 rounded-lg  border-transparent focus:border-transparent focus:ring-0"
 										value={category}
 										onChange={(e) => setCategory(e.target.value)}
 									>
@@ -276,7 +282,7 @@ export default function AddEvent() {
 										Venue Location <span className="text-red-500">*</span>
 									</h3>
 									<input
-										className="p-4 m-2 leading-tight text-gray-100 bg-[#2F3569] border-2 rounded-lg  border-transparent focus:border-transparent focus:ring-0 "
+										className="hover:bg-[#25294A] p-4 m-2 leading-tight text-gray-100 bg-[#2F3569] border-2 rounded-lg  border-transparent focus:border-transparent focus:ring-0 "
 										id="email"
 										type="text"
 										placeholder="Tell attendees the address of the venue."
@@ -313,7 +319,7 @@ export default function AddEvent() {
 										Event Starts <span className="text-red-500">*</span>
 									</h3>
 									<input
-										className="p-4 m-2 leading-tight text-gray-100 bg-[#2F3569] border-2 rounded-lg  border-transparent focus:border-transparent focus:ring-0 "
+										className="hover:bg-[#25294A] p-4 m-2 leading-tight text-gray-100 bg-[#2F3569] border-2 rounded-lg  border-transparent focus:border-transparent focus:ring-0 "
 										id="email"
 										type="date"
 										placeholder="Be clear and descriptive."
@@ -326,7 +332,7 @@ export default function AddEvent() {
 										Event Ends <span className="text-red-500">*</span>
 									</h3>
 									<input
-										className="p-4 m-2 leading-tight text-gray-100 bg-[#2F3569] border-2 rounded-lg  border-transparent focus:border-transparent focus:ring-0 "
+										className="hover:bg-[#25294A] p-4 m-2 leading-tight text-gray-100 bg-[#2F3569] border-2 rounded-lg  border-transparent focus:border-transparent focus:ring-0 "
 										id="email"
 										type="date"
 										placeholder="Be clear and descriptive."
@@ -341,7 +347,7 @@ export default function AddEvent() {
 										Start Time <span className="text-red-500">*</span>
 									</h3>
 									<input
-										className="  p-4 m-2 leading-tight text-gray-100 bg-[#2F3569] border-2 rounded-lg  border-transparent focus:border-transparent focus:ring-0 "
+										className=" hover:bg-[#25294A] p-4 m-2 leading-tight text-gray-100 bg-[#2F3569] border-2 rounded-lg  border-transparent focus:border-transparent focus:ring-0 "
 										id="startTime"
 										type="time"
 										placeholder="Be clear and descriptive."
@@ -354,7 +360,7 @@ export default function AddEvent() {
 										End Time <span className="text-red-500">*</span>
 									</h3>
 									<input
-										className="p-4 m-2 leading-tight text-gray-100 bg-[#2F3569] border-2 rounded-lg  border-transparent focus:border-transparent focus:ring-0 "
+										className="hover:bg-[#25294A] p-4 m-2 leading-tight text-gray-100 bg-[#2F3569] border-2 rounded-lg  border-transparent focus:border-transparent focus:ring-0 "
 										id="endTime"
 										type="time"
 										placeholder="Be clear and descriptive."
