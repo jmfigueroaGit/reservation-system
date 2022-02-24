@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-
+import Dropdown from './Dropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUser } from '@/actions/userAction';
 import { signOut } from 'next-auth/react';
@@ -14,10 +14,6 @@ export default function Header() {
 	useEffect(() => {
 		if (!user) dispatch(loadUser());
 	}, [dispatch, user]);
-
-	const logoutHandler = () => {
-		signOut({ callbackUrl: `/login` });
-	};
 
 	if (loading) {
 		return <LoadingScreen />;
@@ -59,14 +55,8 @@ export default function Header() {
 								<h3 className="text-sm font-semibold">Tickets</h3>
 							</div>
 							<div className="flex flex-col items-center justify-center h-full p-8 mr-2 text-indigo-200 hover:bg-[#2b2f53]">
-								<h1 className="text-md">{user.name}</h1>
+								<Dropdown name={user.name} />
 							</div>
-							<button
-								className="flex flex-col items-center justify-center h-full py-8 px-4 mr-2 text-indigo-200 hover:bg-[#2b2f53]"
-								onClick={logoutHandler}
-							>
-								Logout
-							</button>
 						</div>
 					)}
 				</div>
