@@ -29,7 +29,6 @@ export default function Details() {
 				setImagePreview(reader.result);
 			}
 		};
-
 		reader.readAsDataURL(e.target.files[0]);
 	};
 	const deleteImage = (e) => {
@@ -98,18 +97,20 @@ export default function Details() {
 								</div>
 							</li>
 						</Link>
-						<li className="flex items-center justify-between w-full mb-6 text-indigo-200 cursor-pointer hover:text-indigo-400">
-							<div className="flex items-center">
-								{!finish ? (
-									<h1 className="bg-[#25294A] text-white py-1 px-3 rounded-full">
-										5
-									</h1>
-								) : (
-									<CheckCircleIcon className="h-9" />
-								)}
-								<span className="ml-2 font-semibold text-md">Publish</span>
-							</div>
-						</li>
+						<Link href={'/manage/events/1/preview-publish'} passHref>
+							<li className="flex items-center justify-between w-full mb-6 text-indigo-200 cursor-pointer hover:text-indigo-400">
+								<div className="flex items-center">
+									{!finish ? (
+										<h1 className="bg-[#25294A] text-white py-1 px-3 rounded-full">
+											5
+										</h1>
+									) : (
+										<CheckCircleIcon className="h-9" />
+									)}
+									<span className="ml-2 font-semibold text-md">Publish</span>
+								</div>
+							</li>
+						</Link>
 					</ul>
 				</div>
 			</div>
