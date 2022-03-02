@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { createEvent } from '@/actions/eventAction';
 import ButtonLoader from '../layout/ButtonLoader';
+import { EVENT_GET_RESET } from '@/redux/constants/eventConstant';
 
 export default function AddEvent() {
 	const [title, setTitle] = useState('');
@@ -90,6 +91,7 @@ export default function AddEvent() {
 			toast.error('Please fill up all fields');
 		} else {
 			dispatch(createEvent(eventData));
+			dispatch({ type: EVENT_GET_RESET });
 		}
 	};
 	return (

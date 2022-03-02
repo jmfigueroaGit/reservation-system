@@ -6,7 +6,7 @@ export const isAuthenticatedUser = asyncHandler(async (req, res, next) => {
 
 	if (!session) {
 		res.status(401);
-		throw new Error(session);
+		throw new Error('Login first to access this resource', 401);
 	}
 
 	req.user = session.user;

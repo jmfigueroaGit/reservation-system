@@ -1,17 +1,28 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUser } from '@/actions/userAction';
+import { getEvents } from '@/actions/eventAction';
 import LoadingScreen from './layout/LoadingScreen';
+import { EventCard } from './card/EventCard';
 export default function Home() {
 	const dispatch = useDispatch();
 	const { loading, user } = useSelector((state) => state.loadedUser);
-
+	const {
+		loading: eventLoading,
+		events,
+		success,
+	} = useSelector((state) => state.getEvents);
 	useEffect(() => {
-		if (!user) dispatch(loadUser());
-	}, [dispatch, user]);
+		if (!success) {
+			dispatch(getEvents());
+		}
+		if (!user) {
+			dispatch(loadUser());
+		}
+	}, [dispatch, user, success]);
 	return (
 		<>
-			{loading ? (
+			{loading && eventLoading ? (
 				<LoadingScreen />
 			) : (
 				<>
@@ -31,236 +42,16 @@ export default function Home() {
 					<div className="p-5 ">
 						<h5 className="text-xl font-bold text-gray-100 ">Popular Events</h5>
 						<div className="flex flex-wrap justify-start mt-5">
-							<div className="w-1/5 mx-10 mt-5 overflow-hidden rounded-t-sm shadow-md">
-								<div className="">
-									<img
-										className="w-sm"
-										src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29kZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
-										alt=""
-									/>
-									<div className="px-4 py-2">
-										<h1 className="text-2xl font-bold text-gray-100">
-											Frontend Bootcamp
-										</h1>
-										<h3 className="text-lg font-semibold text-gray-500">
-											Tomorrow at 7:30 AM{' '}
-										</h3>
-										<h5 className="text-lg text-green-500">Free</h5>
-										<div className="flex flex-row items-center pt-3">
-											<img
-												className="h-12 w-12 rounded-full  -top-6 p-0.5 border-2 right-6"
-												src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-												alt=""
-											/>
-											<h1 className="mx-2 text-xl font-semibold text-gray-100">
-												John Doe
-											</h1>
-										</div>
-									</div>
+							{events && events.length === 0 ? (
+								<div className="mt-5 alert alert-danger w-100">
+									<b>No Events Found</b>
 								</div>
-							</div>
-
-							<div className="w-1/5 mx-10 mt-5 overflow-hidden rounded-t-sm shadow-md">
-								<div className="">
-									<img
-										className="w-sm"
-										src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29kZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
-										alt=""
-									/>
-									<div className="px-4 py-2">
-										<h1 className="text-2xl font-bold text-gray-100">
-											Frontend Bootcamp
-										</h1>
-										<h3 className="text-lg font-semibold text-gray-500">
-											Tomorrow at 7:30 AM{' '}
-										</h3>
-										<h5 className="text-lg text-green-500">Free</h5>
-										<div className="flex flex-row items-center pt-3">
-											<img
-												className="h-12 w-12 rounded-full  -top-6 p-0.5 border-2 right-6"
-												src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-												alt=""
-											/>
-											<h1 className="mx-2 text-xl font-semibold text-gray-100">
-												John Doe
-											</h1>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div className="w-1/5 mx-10 mt-5 overflow-hidden rounded-t-sm shadow-md">
-								<div className="">
-									<img
-										className="w-sm"
-										src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29kZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
-										alt=""
-									/>
-									<div className="px-4 py-2">
-										<h1 className="text-2xl font-bold text-gray-100">
-											Frontend Bootcamp
-										</h1>
-										<h3 className="text-lg font-semibold text-gray-500">
-											Tomorrow at 7:30 AM{' '}
-										</h3>
-										<h5 className="text-lg text-green-500">Free</h5>
-										<div className="flex flex-row items-center pt-3">
-											<img
-												className="h-12 w-12 rounded-full  -top-6 p-0.5 border-2 right-6"
-												src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-												alt=""
-											/>
-											<h1 className="mx-2 text-xl font-semibold text-gray-100">
-												John Doe
-											</h1>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div className="w-1/5 mx-10 mt-5 overflow-hidden rounded-t-sm shadow-md">
-								<div className="">
-									<img
-										className="w-sm"
-										src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29kZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
-										alt=""
-									/>
-									<div className="px-4 py-2">
-										<h1 className="text-2xl font-bold text-gray-100">
-											Frontend Bootcamp
-										</h1>
-										<h3 className="text-lg font-semibold text-gray-500">
-											Tomorrow at 7:30 AM{' '}
-										</h3>
-										<h5 className="text-lg text-green-500">Free</h5>
-										<div className="flex flex-row items-center pt-3">
-											<img
-												className="h-12 w-12 rounded-full  -top-6 p-0.5 border-2 right-6"
-												src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-												alt=""
-											/>
-											<h1 className="mx-2 text-xl font-semibold text-gray-100">
-												John Doe
-											</h1>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div className="w-1/5 mx-10 mt-5 overflow-hidden rounded-t-sm shadow-md">
-								<div className="">
-									<img
-										className="w-sm"
-										src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29kZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
-										alt=""
-									/>
-									<div className="px-4 py-2">
-										<h1 className="text-2xl font-bold text-gray-100">
-											Frontend Bootcamp
-										</h1>
-										<h3 className="text-lg font-semibold text-gray-500">
-											Tomorrow at 7:30 AM{' '}
-										</h3>
-										<h5 className="text-lg text-green-500">Free</h5>
-										<div className="flex flex-row items-center pt-3">
-											<img
-												className="h-12 w-12 rounded-full  -top-6 p-0.5 border-2 right-6"
-												src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-												alt=""
-											/>
-											<h1 className="mx-2 text-xl font-semibold text-gray-100">
-												John Doe
-											</h1>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div className="w-1/5 mx-10 mt-5 overflow-hidden rounded-t-sm shadow-md">
-								<div className="">
-									<img
-										className="w-sm"
-										src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29kZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
-										alt=""
-									/>
-									<div className="px-4 py-2">
-										<h1 className="text-2xl font-bold text-gray-100">
-											Frontend Bootcamp
-										</h1>
-										<h3 className="text-lg font-semibold text-gray-500">
-											Tomorrow at 7:30 AM{' '}
-										</h3>
-										<h5 className="text-lg text-green-500">Free</h5>
-										<div className="flex flex-row items-center pt-3">
-											<img
-												className="h-12 w-12 rounded-full  -top-6 p-0.5 border-2 right-6"
-												src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-												alt=""
-											/>
-											<h1 className="mx-2 text-xl font-semibold text-gray-100">
-												John Doe
-											</h1>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div className="w-1/5 mx-10 mt-5 overflow-hidden rounded-t-sm shadow-md">
-								<div className="">
-									<img
-										className="w-sm"
-										src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29kZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
-										alt=""
-									/>
-									<div className="px-4 py-2">
-										<h1 className="text-2xl font-bold text-gray-100">
-											Frontend Bootcamp
-										</h1>
-										<h3 className="text-lg font-semibold text-gray-500">
-											Tomorrow at 7:30 AM{' '}
-										</h3>
-										<h5 className="text-lg text-green-500">Free</h5>
-										<div className="flex flex-row items-center pt-3">
-											<img
-												className="h-12 w-12 rounded-full  -top-6 p-0.5 border-2 right-6"
-												src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-												alt=""
-											/>
-											<h1 className="mx-2 text-xl font-semibold text-gray-100">
-												John Doe
-											</h1>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div className="w-1/5 mx-10 mt-5 overflow-hidden rounded-t-sm shadow-md">
-								<div className="">
-									<img
-										className="w-sm"
-										src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29kZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
-										alt=""
-									/>
-									<div className="px-4 py-2">
-										<h1 className="text-2xl font-bold text-gray-100">
-											Frontend Bootcamp
-										</h1>
-										<h3 className="text-lg font-semibold text-gray-500">
-											Tomorrow at 7:30 AM{' '}
-										</h3>
-										<h5 className="text-lg text-green-500">Free</h5>
-										<div className="flex flex-row items-center pt-3">
-											<img
-												className="h-12 w-12 rounded-full  -top-6 p-0.5 border-2 right-6"
-												src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-												alt=""
-											/>
-											<h1 className="mx-2 text-xl font-semibold text-gray-100">
-												John Doe
-											</h1>
-										</div>
-									</div>
-								</div>
-							</div>
+							) : (
+								events &&
+								events.map((event) => (
+									<EventCard key={event.id} event={event} />
+								))
+							)}
 						</div>
 					</div>
 				</>

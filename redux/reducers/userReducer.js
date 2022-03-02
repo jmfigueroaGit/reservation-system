@@ -9,6 +9,10 @@ import {
 	FIND_EMAIL_FAILED,
 	FIND_EMAIL_REQUEST,
 	FIND_EMAIL_RESET,
+	FIND_USER_SUCCESS,
+	FIND_USER_FAILED,
+	FIND_USER_REQUEST,
+	FIND_USER_RESET,
 	FORGOT_PASSWORD_SUCCESS,
 	FORGOT_PASSWORD_FAILED,
 	FORGOT_PASSWORD_REQUEST,
@@ -101,6 +105,35 @@ export const findEmailReducer = (state = { loading: false }, action) => {
 				error: action.payload,
 			};
 		case FIND_EMAIL_RESET:
+			return {};
+		case CLEAR_ERROR:
+			return {
+				...state,
+				error: null,
+			};
+		default:
+			return state;
+	}
+};
+
+// Find User By ID
+export const findByIdReducer = (state = { user: {} }, action) => {
+	switch (action.type) {
+		case FIND_USER_REQUEST:
+			return {
+				loading: true,
+			};
+		case FIND_USER_SUCCESS:
+			return {
+				loading: false,
+				user: action.payload,
+			};
+		case FIND_USER_FAILED:
+			return {
+				loading: false,
+				error: action.payload,
+			};
+		case FIND_USER_RESET:
 			return {};
 		case CLEAR_ERROR:
 			return {

@@ -1,16 +1,22 @@
 import Event from '@/models/event';
 import Ticket from '@/models/ticket';
+import User from '@/models/user';
 import asyncHandler from 'express-async-handler';
 
 //  @desc   Create event
 //  @route  POST /api/manage/events/create
 //  @access Private
 export const createEvent = asyncHandler(async (req, res) => {
-	const event = await Event.create(req.body);
+	const user = await User.findOne({ email: req.user.email });
 
+	if (!user) {
+		res.status(404);
+		throw new Error('User not found with this email');
+	}
+
+	const event = await Event.create({ user: user._id, ...req.body });
 	if (event) {
 		res.status(201).json({
-			success: true,
 			event,
 		});
 	} else {
@@ -38,7 +44,6 @@ export const updateEvent = asyncHandler(async (req, res) => {
 	}
 
 	res.status(201).json({
-		success: true,
 		event,
 	});
 });
@@ -47,10 +52,9 @@ export const updateEvent = asyncHandler(async (req, res) => {
 //  @route  GET /api/events
 //  @access Public
 export const getEvents = asyncHandler(async (req, res) => {
-	const events = await Event.find();
+	const events = await Event.find().populate('user');
 
 	res.status(200).json({
-		success: true,
 		events,
 	});
 });
@@ -66,7 +70,6 @@ export const getEvent = asyncHandler(async (req, res) => {
 		throw new Error('Event not found with this ID');
 	} else {
 		res.status(200).json({
-			success: true,
 			event,
 		});
 	}

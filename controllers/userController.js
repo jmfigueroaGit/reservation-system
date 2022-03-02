@@ -82,6 +82,20 @@ export const findEmail = asyncHandler(async (req, res) => {
 	});
 });
 
+//  @desc   Find By Id
+//  @route  POST /api/password/forgot
+//  @access Public
+export const findUserById = asyncHandler(async (req, res) => {
+	const user = await User.findById(req.body.id);
+
+	if (!user) {
+		res.status(404);
+		throw new Error('User not found with this email');
+	}
+
+	res.status(200).json(user);
+});
+
 //  @desc   Forgot Password Reset
 //  @route  POST /api/password/forgot
 //  @access Public

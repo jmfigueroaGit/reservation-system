@@ -9,6 +9,9 @@ import {
 	FIND_EMAIL_SUCCESS,
 	FIND_EMAIL_FAILED,
 	FIND_EMAIL_REQUEST,
+	FIND_USER_SUCCESS,
+	FIND_USER_FAILED,
+	FIND_USER_REQUEST,
 	USER_UPDATE_SUCCESS,
 	USER_UPDATE_FAILED,
 	USER_UPDATE_REQUEST,
@@ -89,6 +92,31 @@ export const findUserEmail = (email) => async (dispatch) => {
 	} catch (error) {
 		dispatch({
 			type: FIND_EMAIL_FAILED,
+			payload: error.response.data.message,
+		});
+	}
+};
+
+//Find By ID
+export const findById = (id) => async (dispatch) => {
+	try {
+		dispatch({ type: FIND_USER_REQUEST });
+
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		};
+
+		const { data } = await axios.post('/api/user/findById', { id }, config);
+
+		dispatch({
+			type: FIND_USER_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		dispatch({
+			type: FIND_USER_FAILED,
 			payload: error.response.data.message,
 		});
 	}
