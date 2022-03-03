@@ -35,7 +35,7 @@ export default function Dropdown({ name }) {
 				>
 					<Menu.Items className="absolute right-0 w-60 mt-2 origin-top-right bg-[#2b2f53] divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
 						<div className="px-3 py-1 ">
-							<Link href="/manage/events/1/basicinfo" passHref>
+							<Link href="/manage/events/" passHref>
 								<Menu.Item>
 									{({ active }) => (
 										<button

@@ -3,12 +3,25 @@ import sendEmail from '@/utils/sendEmail';
 import asyncHandler from 'express-async-handler';
 import crypto from 'crypto';
 import absoluteUrl from 'next-absolute-url';
+import cloudinary from 'cloudinary';
+
+cloudinary.config({
+	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+	api_key: process.env.CLOUDINARY_API_KEY,
+	api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 //  @desc   Register user
 //  @route  POST /api/auth
 //  @access Public
 export const registerUser = asyncHandler(async (req, res) => {
 	const { name, email, password } = req.body;
+
+	const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+		folder: 'dubupod/avatars',
+		width: '150',
+		crop: 'scale',
+	});
 
 	const emailExists = await User.findOne({ email });
 
@@ -21,6 +34,10 @@ export const registerUser = asyncHandler(async (req, res) => {
 		name,
 		email,
 		password,
+		avatar: {
+			public_id: result.public_id,
+			url: result.secure_url,
+		},
 	});
 
 	if (user) {

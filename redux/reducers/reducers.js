@@ -8,7 +8,12 @@ import {
 	forgotPasswordReducer,
 	resetPasswordReducer,
 } from './userReducer';
-import { createEventReducer, getEventsReducer } from './eventReducer';
+import {
+	createEventReducer,
+	getEventsReducer,
+	userEventsReducer,
+	getEventReducer,
+} from './eventReducer';
 
 const reducer = combineReducers({
 	register: registerReducer,
@@ -19,6 +24,8 @@ const reducer = combineReducers({
 	resetPassword: resetPasswordReducer,
 	createEvent: createEventReducer,
 	getEvents: getEventsReducer,
+	userEvents: userEventsReducer,
+	getEvent: getEventReducer,
 });
 
 export default reducer;

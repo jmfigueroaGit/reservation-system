@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import ButtonLoader from '../layout/ButtonLoader';
 import Default from '../layout/Default';
-
+import { CameraIcon } from '@heroicons/react/solid';
 import { toast } from 'react-toastify';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,6 +15,9 @@ export default function Register() {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+
+	const [avatar, setAvatar] = useState('');
+	const [preview, setPreview] = useState('/images/default_avatar.jpg');
 
 	const { success, error, loading } = useSelector((state) => state.register);
 
@@ -36,11 +39,24 @@ export default function Register() {
 				name,
 				email,
 				password,
+				avatar,
 			};
 			dispatch(registerUser(userData));
 		}
 	};
 
+	const handleChange = (e) => {
+		e.preventDefault();
+		const reader = new FileReader();
+
+		reader.onload = () => {
+			if (reader.readyState === 2) {
+				setAvatar(reader.result);
+				setPreview(reader.result);
+			}
+		};
+		reader.readAsDataURL(e.target.files[0]);
+	};
 	return (
 		<Default>
 			<form
@@ -51,6 +67,28 @@ export default function Register() {
 					<h1 className="text-3xl font-bold text-white">Create your account</h1>
 				</div>
 
+				<label className="pt-5 cursor-pointer hover:bg-gray-900 w-68 ">
+					<div className="flex flex-col items-center justify-center">
+						<img src={preview} className="w-20 h-20 rounded-full" alt="image" />
+						<div className="flex flex-col items-center ">
+							<h1 className="pt-1 font-semibold tracking-wider text-white text-md ">
+								Select a photo
+							</h1>
+							<p className="pt-1 text-sm font-thin tracking-wider text-gray-300 ">
+								Upload Image(jpg,png,svg,jpeg)
+							</p>
+						</div>
+					</div>
+					<input
+						type="file"
+						name="avatar"
+						className="opacity-0"
+						id="customFile"
+						accept="images/*"
+						onChange={handleChange}
+						required
+					/>
+				</label>
 				<input
 					className="w-1/5 p-4 m-2 leading-tight text-gray-100 bg-[#2F3569] border-2 rounded-lg  border-transparent focus:border-transparent focus:ring-0 "
 					id="name"

@@ -4,7 +4,10 @@ import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { createEvent } from '@/actions/eventAction';
 import ButtonLoader from '../layout/ButtonLoader';
-import { EVENT_GET_RESET } from '@/redux/constants/eventConstant';
+import {
+	EVENT_GET_RESET,
+	USER_EVENTS_RESET,
+} from '@/redux/constants/eventConstant';
 
 export default function AddEvent() {
 	const [title, setTitle] = useState('');
@@ -61,7 +64,7 @@ export default function AddEvent() {
 		e.preventDefault();
 		const eventData = {
 			title,
-			org,
+			organization: org,
 			type,
 			category,
 			location: {
@@ -92,6 +95,7 @@ export default function AddEvent() {
 		} else {
 			dispatch(createEvent(eventData));
 			dispatch({ type: EVENT_GET_RESET });
+			dispatch({ type: USER_EVENTS_RESET });
 		}
 	};
 	return (

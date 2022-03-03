@@ -1,8 +1,3 @@
-import { findById } from '@/actions/userAction';
-import { FIND_USER_RESET } from '@/redux/constants/userConstant';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
 export const EventCard = ({ event }) => {
 	return (
 		<div
@@ -10,11 +5,7 @@ export const EventCard = ({ event }) => {
 			key={event._id}
 		>
 			<div className="">
-				<img
-					className="w-sm"
-					src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29kZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
-					alt=""
-				/>
+				<img className="w-sm" src="/images/empty.jpg" alt={event.title} />
 				<div className="px-4 py-2">
 					<h1 className="text-2xl font-bold text-gray-100">{event.title}</h1>
 					<h3 className="text-lg font-semibold text-gray-500">
@@ -29,8 +20,8 @@ export const EventCard = ({ event }) => {
 					<div className="flex flex-row items-center pt-3">
 						<img
 							className="h-12 w-12 rounded-full  -top-6 p-0.5 border-2 right-6"
-							src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-							alt=""
+							src={event.user.avatar.url}
+							alt={event.user.avatar.url}
 						/>
 						<h1 className="mx-2 text-xl font-semibold text-gray-100">
 							{event.user.name}

@@ -54,9 +54,16 @@ export const updateEvent = asyncHandler(async (req, res) => {
 export const getEvents = asyncHandler(async (req, res) => {
 	const events = await Event.find().populate('user');
 
-	res.status(200).json({
-		events,
-	});
+	res.status(200).json(events);
+});
+
+//  @desc   Get user's events
+//  @route  POST /api/events
+//  @access Public
+export const getUserEvents = asyncHandler(async (req, res) => {
+	const events = await Event.find({ user: req.body.id }).populate('user');
+
+	res.status(200).json(events);
 });
 
 //  @desc   Get single event
@@ -69,9 +76,7 @@ export const getEvent = asyncHandler(async (req, res) => {
 		res.status(400);
 		throw new Error('Event not found with this ID');
 	} else {
-		res.status(200).json({
-			event,
-		});
+		res.status(200).json(event);
 	}
 });
 

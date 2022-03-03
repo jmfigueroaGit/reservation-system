@@ -31,12 +31,12 @@ export default function Header() {
 					<div className="block w-full lg:flex lg:items-center lg:w-2/6">
 						{!user ? (
 							<div className="flex justify-end mr-20 text-lg lg:flex-grow">
-								<Link href="/login">
+								<Link href="/login" passHref>
 									<a className="block mt-4 mr-4 text-indigo-200 lg:inline-block lg:mt-0 hover:text-white">
 										Login
 									</a>
 								</Link>
-								<Link href="/register">
+								<Link href="/register" passHref>
 									<a className="block mt-4 ml-10 text-indigo-200 lg:inline-block lg:mt-0 hover:text-white">
 										Register
 									</a>
@@ -54,7 +54,12 @@ export default function Header() {
 									<TicketIcon className="h-7 " />
 									<h3 className="text-sm font-semibold">Tickets</h3>
 								</div>
-								<div className="flex flex-col items-center justify-center h-full p-8 mr-2 text-indigo-200 hover:bg-[#2b2f53]">
+								<div className="flex flex-row items-center justify-center h-full p-8 mr-2 text-indigo-200 hover:bg-[#2b2f53]">
+									<img
+										src={user.avatar.url}
+										className="rounded-full w-14 "
+										alt="image"
+									/>
 									<Dropdown name={user.name} />
 								</div>
 							</div>
